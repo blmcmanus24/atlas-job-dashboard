@@ -68,7 +68,7 @@ export default async function main({inputData}) {
       records.push(record);if(records.length>10000)throw Error('Table exceeds safety limit; publication withheld');
     }
     const normalized=normalizeRecords(records,config.fieldMap,coordinateCache);
-    const payload={source:'zapier-table',delivery:'github',...normalized,lastSuccessfulRefresh:startedAt,stale:false};
+    const payload={source:'zapier-table',delivery:'github',...normalized,lastSuccessfulRefresh:startedAt,publicationRequestId:String(inputData.request_id||'').slice(0,128),stale:false};
     const fileContent=JSON.stringify(payload,null,2);
     const result=await github({method:'PUT',body:JSON.stringify({message:'Refresh Atlas dashboard from Zapier Tables',content:Buffer.from(fileContent,'utf8').toString('base64'),branch:'main',...(old?{sha:old.sha}:{})})});
     if(result.status===409||result.status===422)continue;
