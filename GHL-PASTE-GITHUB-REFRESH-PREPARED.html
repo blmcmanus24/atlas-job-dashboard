@@ -80,7 +80,7 @@ window.addEventListener('appinstalled',()=>{$('installApp').hidden=true});
 
 // Runs inside the isolated GHL dashboard. Contains no Zapier credential.
 const atlasGitHubPublishingEnabled=false;
-const atlasGitHubDataUrl='https://raw.githubusercontent.com/blmcmanus24/atlas-job-dashboard/main/jobs.json';
+const atlasGitHubDataUrl='https://api.github.com/repos/blmcmanus24/atlas-job-dashboard/contents/jobs.json';
 const atlasRefreshHookUrl="";
 const endpoint=atlasGitHubPublishingEnabled?atlasGitHubDataUrl:'';
 const onDemand=true;
@@ -93,9 +93,9 @@ async function refreshTable(){
  if(!endpoint){connectionStatus('GitHub/Zapier refresh setup is pending.');return;}
  if(refreshBusy)return;refreshBusy=true;refreshButton.disabled=true;const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),25000);
  try{
- const response=await fetch(endpoint+'?refresh='+Date.now(),{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',headers:typeof atlasRequestHeaders==='function'?atlasRequestHeaders():undefined,signal:controller.signal});
+ const response=await fetch(endpoint+'?ref=main&refresh='+Date.now(),{method:'GET',mode:'cors',credentials:'omit',cache:'no-store',headers:{Accept:'application/vnd.github.raw+json'},signal:controller.signal});
  if(response.status===401&&typeof atlasRequireLogin==='function'){atlasRequireLogin();return;}
- if(!response.ok)throw Error('Table reader is unavailable');const payload=await response.json();
+ if(response.status===403||response.status===429)throw Error('GitHub access or request limit blocked the read');if(!response.ok)throw Error('Table reader is unavailable');const payload=await response.json();
  if(payload.source!=='zapier-table'||!Array.isArray(payload.jobs)||!payload.coordinates||typeof payload.coordinates!=='object'||!Number.isFinite(Date.parse(payload.lastSuccessfulRefresh)))throw Error('Unexpected table response');
  const seen=new Set();for(const job of payload.jobs){for(const key of ['Customer','Address','Job Type','Status','Work Order','Scheduled Date','Job Amount USD','Job Description','Address Note','Possible Addresses','Warranty Flag','Map Category'])if(typeof job[key]!=='string')throw Error('Invalid job schema');if(!job['Work Order']||seen.has(job['Work Order']))throw Error('Invalid work-order key');seen.add(job['Work Order']);}
  for(const [id,c]of Object.entries(payload.coordinates))if(!seen.has(id)||!Number.isFinite(c.lat)||!Number.isFinite(c.lon)||Math.abs(c.lat)>90||Math.abs(c.lon)>180)throw Error('Invalid coordinates');
@@ -126,7 +126,7 @@ async function atlasRefreshCurrentJobs(){
   await refreshTable();refreshButton.disabled=true;
   if(atlasLastRequestId===requestId){connectionStatus('Current Zapier jobs published through GitHub · '+new Date(lastTableSuccess).toLocaleString('en-US',{timeZone:'America/Chicago'}));return;}
   connectionStatus('Zapier refresh requested · waiting for a newer GitHub publication. Previously published data may still be displayed.');
-  await new Promise(resolve=>setTimeout(resolve,5000));
+  await new Promise(resolve=>setTimeout(resolve,15000));
  }
  throw Error('No newer publication was confirmed. GitHub caching or the Zap may be delaying the update.');
  }catch(error){connectionStatus(error.name==='AbortError'?'Refresh request timed out; no fresh publication confirmed.':error.message);}
