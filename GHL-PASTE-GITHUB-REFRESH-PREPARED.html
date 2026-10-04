@@ -114,7 +114,7 @@ async function refreshTable(){
  }finally{clearTimeout(timeout);refreshBusy=false;refreshButton.disabled=false;}
 }
 async function atlasRefreshCurrentJobs(){
- if(!endpoint||!atlasRefreshHookUrl){connectionStatus('Refresh is not active: private GitHub data and the Zapier publisher trigger still need configuration.');return;}
+ if(!endpoint||!atlasRefreshHookUrl){connectionStatus('Refresh is not active: the Zapier publisher webhook still needs configuration.');return;}
  if(refreshBusy)return;
  refreshButton.disabled=true;connectionStatus('Requesting a fresh Zapier table read and GitHub publication…');
  const requestId=crypto.randomUUID(),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),15000);
@@ -135,7 +135,7 @@ async function atlasRefreshCurrentJobs(){
 refreshButton.onclick=atlasRefreshCurrentJobs;
 if(onDemand)connectionStatus(endpoint?'Press Refresh table to request a current Zapier read and wait for GitHub publication.':'Setup pending · Refresh is inactive. No customer data is included in this page.');
 else refreshTable();
-root.querySelector('.snapshot').textContent='SETUP PENDING';root.querySelector('.source b').textContent='No customer data loaded';root.querySelector('.snapshotNotes .notice').textContent='This updated page contains no embedded job records. Refresh can be activated after publication visibility is approved and the Zapier trigger is verified.';
+root.querySelector('.snapshot').textContent='SETUP PENDING';root.querySelector('.source b').textContent='No customer data loaded';root.querySelector('.snapshotNotes .notice').textContent='This updated page contains no embedded job records. The GitHub data file is public. Refresh can be activated after the Zapier publisher webhook is configured and verified.';
 const refreshTimer=onDemand?null:setInterval(()=>{if(document.visibilityState==='visible')refreshTable()},60000);
 document.addEventListener('visibilitychange',()=>{if(!onDemand&&document.visibilityState==='visible')refreshTable()});
 // No localStorage, IndexedDB or service worker: last-good job data lasts only in page memory.
