@@ -1,6 +1,6 @@
 # Prepared GoHighLevel Refresh — GitHub + Zapier only
 
-Status: PREPARED, NOT ACTIVE. No Render service or new hosting account is used. Existing working Markate Zaps and the private repository are unchanged in visibility.
+Status: PREPARED, NOT ACTIVE. No Render service or new hosting account is used. Existing working Markate Zaps are unchanged. The repository is now PUBLIC with explicit user approval.
 
 ## Artifact
 
@@ -9,15 +9,11 @@ GHL-PASTE-GITHUB-REFRESH-PREPARED.html is the full Custom Javascript/HTML elemen
 Concrete intended data address:
 https://raw.githubusercontent.com/blmcmanus24/atlas-job-dashboard/main/jobs.json
 
-That address currently cannot be read anonymously because its repository is PRIVATE. The file name and Zapier connection ID do not grant access.
+That exact address was verified anonymously: HTTP 200, 54 unfinished jobs and 52 positions. The repository, customer data and saved history were made public with explicit user approval. No further visibility approval or GitHub authorization is required.
 
-## Exact approval needed for this route
+The only setup blocker is the NEW publisher Zap and its Catch Hook URL. The available Zapier management actions can find or toggle existing Zaps but cannot create one.
 
-To use this address with the ordinary public GoHighLevel page, approve making blmcmanus24/atlas-job-dashboard publicly readable. This exposes customer job data, saved snapshots, address/coordinate source material, and repository history—not merely the latest jobs.json. No visibility change has been made. Alternative public delivery repositories are not created or assumed authorized.
-
-If customer data must stay private, this prepared route cannot be activated as-is. Zapier's supported private alternative is a separately opened managed-user Forms table/kanban; restricted Forms cannot be embedded and do not provide this custom map runtime. The already-working local map is another private option.
-
-## Publisher setup after approval
+## Publisher setup
 
 Create one NEW publisher Zap; preserve Markate Scheduled and Completed:
 1. Trigger: Webhooks by Zapier → Catch Hook. Copy its exact hook URL.
@@ -25,7 +21,7 @@ Create one NEW publisher Zap; preserve Markate Scheduled and Completed:
 3. Add input field request_id mapped to the Catch Hook request_id. This connects a browser refresh request to its specific completed publication. Do not map a fixed test value in production.
 4. Test in the hosted Code runtime: complete table read, GitHub write, and output commit/counts. Verify table permissions, plan runtime and webhook CORS from the GHL origin. The publisher has been verified locally with real service data, but this hosted Zap does not yet exist.
 5. Publish the new Zap.
-6. After public visibility is authorized and anonymous JSON retrieval succeeds, generate activated markup with package-github-refresh.py --enable-public --hook VERIFIED_HOOK_URL. Reverify from the real GHL page before saying refresh is active.
+6. Anonymous JSON retrieval is already verified. Once the hosted publisher is working, generate activated markup with package-github-refresh.py --enable-public --hook VERIFIED_HOOK_URL. Reverify from the real GHL page before saying refresh is active.
 7. Paste that ACTIVATED result into the existing dashboard's Custom Javascript/HTML element and publish only that page. No DNS changes are required.
 
 ## On-demand behavior
@@ -34,7 +30,7 @@ No page-load pull or continuous polling. A click POSTs a random request_id to th
 
 ## Verification
 
-Markup syntax checked. Client tests pass for disabled/no-network state and simulated trigger-to-matching-publication state. This is NOT end-to-end hosted verification. Current published GHL page remains its embedded snapshot. Local on-demand Mac dashboard remains usable.
+Markup syntax checked. Client tests pass for disabled/no-network state and simulated trigger-to-matching-publication state. This is NOT end-to-end hosted verification. Current published GHL page remains its embedded snapshot. The new prepared artifact is intentionally disabled until the webhook URL is supplied. Local on-demand Mac dashboard remains usable.
 
 References:
 https://help.zapier.com/hc/en-us/articles/8496288690317-Trigger-Zap-workflows-from-webhooks
