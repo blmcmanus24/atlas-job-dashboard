@@ -7,9 +7,9 @@ Status: PREPARED, NOT ACTIVE. No Render service or new hosting account is used. 
 GHL-PASTE-GITHUB-REFRESH-PREPARED.html is the full Custom Javascript/HTML element replacement. It contains no customer jobs, coordinates or credentials. Its Refresh button is intentionally disabled until activation. Do not replace the current working page expecting live updates yet; this version would display no jobs until configured.
 
 Concrete intended data address:
-https://raw.githubusercontent.com/blmcmanus24/atlas-job-dashboard/main/jobs.json
+https://api.github.com/repos/blmcmanus24/atlas-job-dashboard/contents/jobs.json
 
-That exact address was verified anonymously: HTTP 200, 54 unfinished jobs and 52 positions. The repository, customer data and saved history were made public with explicit user approval. No further visibility approval or GitHub authorization is required.
+The public file API is read with Accept: application/vnd.github.raw+json. It was verified anonymously: HTTP 200, 54 unfinished jobs and 52 positions. The repository, customer data and saved history were made public with explicit user approval. No further visibility approval or GitHub authorization is required.
 
 The only setup blocker is the NEW publisher Zap and its Catch Hook URL. The available Zapier management actions can find or toggle existing Zaps but cannot create one.
 
@@ -26,7 +26,7 @@ Create one NEW publisher Zap; preserve Markate Scheduled and Completed:
 
 ## On-demand behavior
 
-No page-load pull or continuous polling. A click POSTs a random request_id to the webhook, then checks GitHub for up to three minutes. Only a returned publicationRequestId matching that request confirms fresh table data. GitHub caching or a Zap error can prevent confirmation; the page reports that honestly and keeps the last good data. Completed/invoiced jobs are filtered by the full-table publisher. The webhook acknowledgement alone never means a table refresh succeeded.
+No page-load pull or continuous polling. A click POSTs a random request_id to the webhook, then checks GitHub for up to three minutes. Only a returned publicationRequestId matching that request confirms fresh table data. The API returned the real matching identifier in an authenticated-table → GitHub-public-API integration check. Raw GitHub URLs were observed returning cached data, so this code uses the public file API instead. It checks at most every 15 seconds while awaiting a publication. GitHub limits unauthenticated API requests to 60 per hour per IP; repeated refreshes or shared networks can reach that limit. No token is embedded to bypass it. GitHub caching or a Zap error can prevent confirmation; the page reports that honestly and keeps the last good data. Completed/invoiced jobs are filtered by the full-table publisher. The webhook acknowledgement alone never means a table refresh succeeded.
 
 ## Verification
 
