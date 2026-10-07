@@ -45,20 +45,6 @@
       "Map Category": "Mudjacking"
     },
     {
-      "Customer": "Cory Debraal",
-      "Address": "W157N7444 Stonewood Circle, Menomonee Falls, WI, 53051",
-      "Job Type": "Mudjacking",
-      "Status": "Scheduled",
-      "Work Order": "WO-2026001572",
-      "Scheduled Date": "06 Oct 2026, 1:00 pm to 2:00 pm",
-      "Job Amount USD": "1950",
-      "Job Description": "Mud Job for Estimate #EST-2026585 (WO-2026001572)",
-      "Address Note": "Single customer address; confirm service location",
-      "Possible Addresses": "",
-      "Warranty Flag": "Not flagged",
-      "Map Category": "Mudjacking"
-    },
-    {
       "Customer": "Joshua Land",
       "Address": "10160 West Montana Avenue, West Allis, WI, 53227",
       "Job Type": "Mudjacking",
@@ -481,16 +467,16 @@
     {
       "Customer": "Kevin Bronk",
       "Address": "7544 North Crossway Road, Fox Point, WI, 53217",
-      "Job Type": "Mudjacking",
-      "Status": "New",
+      "Job Type": "Unclear",
+      "Status": "Scheduled",
       "Work Order": "WO-2026001593",
-      "Scheduled Date": "",
+      "Scheduled Date": "08 Oct 2026, 11:00 am",
       "Job Amount USD": "1050",
-      "Job Description": "Mud Job for Estimate #EST-2026635 (WO-2026001593)",
+      "Job Description": "Mud Job for Estimate #EST-2026635",
       "Address Note": "Single customer address; confirm service location",
       "Possible Addresses": "",
       "Warranty Flag": "Not flagged",
-      "Map Category": "Mudjacking"
+      "Map Category": "Unclear"
     },
     {
       "Customer": "Renee Campbell",
@@ -579,30 +565,16 @@
     {
       "Customer": "Derek Aspinall",
       "Address": "8492 North Meadowside Court, Brown Deer, WI, 53223",
-      "Job Type": "Mudjacking",
-      "Status": "New",
+      "Job Type": "Unclear",
+      "Status": "Scheduled",
       "Work Order": "WO-2026001569",
-      "Scheduled Date": "",
+      "Scheduled Date": "08 Oct 2026, 8:00 am",
       "Job Amount USD": "2650",
-      "Job Description": "Mud Job for Estimate #EST-2026471 (WO-2026001569)",
+      "Job Description": "Mud Job for Estimate #EST-2026471",
       "Address Note": "Single customer address; confirm service location",
       "Possible Addresses": "",
       "Warranty Flag": "Not flagged",
-      "Map Category": "Mudjacking"
-    },
-    {
-      "Customer": "Alfredo Huerta",
-      "Address": "5830 North 113th Street, Milwaukee, WI, 53225",
-      "Job Type": "Mudjacking",
-      "Status": "New",
-      "Work Order": "WO-2026001571",
-      "Scheduled Date": "",
-      "Job Amount USD": "1900",
-      "Job Description": "Mud Job for Estimate #EST-2026593 (WO-2026001571)",
-      "Address Note": "Single customer address; confirm service location",
-      "Possible Addresses": "",
-      "Warranty Flag": "Not flagged",
-      "Map Category": "Mudjacking"
+      "Map Category": "Unclear"
     },
     {
       "Customer": "Jill Hayes",
@@ -757,6 +729,20 @@
       "Possible Addresses": "",
       "Warranty Flag": "Not flagged",
       "Map Category": "Polyurethane"
+    },
+    {
+      "Customer": "Dave Doro",
+      "Address": "8354 Gridley Avenue, Wauwatosa, WI, 53213",
+      "Job Type": "Unclear",
+      "Status": "Scheduled",
+      "Work Order": "WO-2026001575",
+      "Scheduled Date": "09 Oct 2026, 12:00 pm",
+      "Job Amount USD": "1950",
+      "Job Description": "Mud Job for Estimate #EST-2026596",
+      "Address Note": "Address from Zapier table; confirm service location",
+      "Possible Addresses": "",
+      "Warranty Flag": "Not flagged",
+      "Map Category": "Unclear"
     }
   ],
   "coordinates": {
@@ -780,14 +766,6 @@
       "lat": 43.135314284803,
       "lon": -88.071520578019,
       "matchedAddress": "N64W12921 DAYLILY CT, MENOMONEE FALLS, WI, 53051",
-      "matchType": "Exact",
-      "provider": "US Census Geocoder",
-      "retrieved": "2026-10-03"
-    },
-    "WO-2026001572": {
-      "lat": 43.15283666785,
-      "lon": -88.105936220713,
-      "matchedAddress": "W157N7444 STONEWOOD CIR, MENOMONEE FALLS, WI, 53051",
       "matchType": "Exact",
       "provider": "US Census Geocoder",
       "retrieved": "2026-10-03"
@@ -1088,14 +1066,6 @@
       "provider": "US Census Geocoder",
       "retrieved": "2026-10-03"
     },
-    "WO-2026001571": {
-      "lat": 43.123748217764,
-      "lon": -88.052939422762,
-      "matchedAddress": "5830 N 113TH ST, MILWAUKEE, WI, 53225",
-      "matchType": "Exact",
-      "provider": "US Census Geocoder",
-      "retrieved": "2026-10-03"
-    },
     "WO-2026001568": {
       "lat": 43.299062898008,
       "lon": -88.362585350549,
@@ -1180,7 +1150,7 @@
   "warnings": [
     "1 older duplicate record(s) resolved by newest table edit."
   ],
-  "lastSuccessfulRefresh": "2026-10-06T21:12:18.099Z",
-  "publicationRequestId": "f690b685-cdb9-4b4f-a5df-fdbd136a9789",
+  "lastSuccessfulRefresh": "2026-10-07T23:01:31.182Z",
+  "publicationRequestId": "9f603e11-da84-4cf1-bc1f-d3c2c58a4c76",
   "stale": false
 }
